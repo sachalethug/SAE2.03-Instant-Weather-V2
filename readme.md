@@ -40,7 +40,7 @@ Une application web moderne et responsive pour consulter les prévisions météo
 
 ## 🌐 Démo en ligne
 
-🔗 **[Voir la démo](https://sachalethug.github.io/SAE2.02-Instant-Weather-V2/)**
+🔗 **[Voir la démo](https://sachalethug.github.io/SAE2.03-Instant-Weather-V2/)**
 
 ## 🎯 Conformité et standards
 
