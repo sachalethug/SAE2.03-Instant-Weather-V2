@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instant Weather - Prévisions météorologiques</title>
+    <meta name="description" content="Consultez les prévisions météorologiques détaillées pour votre commune">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" href="favicon/icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:FILL@1">
+
+
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>
+                <span class="weather-icon">🌤️</span>
+                Instant Weather
+            </h1>
+            <p class="subtitle">Prévisions météorologiques précises pour votre commune</p>
+            <button id="darkModeToggle" class="dark-mode-toggle" aria-label="Basculer en mode sombre">
+                <span class="dark-mode-icon">🌙</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="search-section">
+            <form id="weatherForm" class="weather-form">
+                <div class="form-group">
+                    <label for="postalCode">Code postal :</label>
+                    <input 
+                        type="text" 
+                        id="postalCode" 
+                        name="postalCode" 
+                        pattern="[0-9]{5}" 
+                        maxlength="5" 
+                        required 
+                        aria-describedby="postalCodeHelp"
+                        placeholder="75001"
+                    >
+                    <small id="postalCodeHelp" class="help-text">Saisissez un code postal français (5 chiffres)</small>
+                </div>
+
+                <div class="form-group" id="communeGroup" style="display: none;">
+                    <label for="communeSelect">Commune :</label>
+                    <select id="communeSelect" name="commune" aria-describedby="communeHelp">
+                        <option value="">Sélectionnez une commune</option>
+                    </select>
+                    <small id="communeHelp" class="help-text">Choisissez la commune souhaitée</small>
+                </div>
+
+                <div class="form-group">
+                    <label>Nombre de jours de prévisions :</label>
+                    <div class="days-selector" role="radiogroup" aria-labelledby="daysLabel">
+                        <span id="daysLabel" class="sr-only">Sélectionner le nombre de jours</span>
+                        <button type="button" class="day-btn active" data-days="1" aria-pressed="true">1 jour</button>
+                        <button type="button" class="day-btn" data-days="2" aria-pressed="false">2 jours</button>
+                        <button type="button" class="day-btn" data-days="3" aria-pressed="false">3 jours</button>
+                        <button type="button" class="day-btn" data-days="4" aria-pressed="false">4 jours</button>
+                        <button type="button" class="day-btn" data-days="5" aria-pressed="false">5 jours</button>
+                        <button type="button" class="day-btn" data-days="6" aria-pressed="false">6 jours</button>
+                        <button type="button" class="day-btn" data-days="7" aria-pressed="false">7 jours</button>
+                    </div>
+                </div>
+
+                <fieldset class="additional-info">
+                    <legend>Informations supplémentaires :</legend>
+                    <div class="checkbox-grid">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="showLatitude" name="additionalInfo" value="latitude">
+                            <span class="checkmark"></span>
+                            Latitude de la commune
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="showLongitude" name="additionalInfo" value="longitude">
+                            <span class="checkmark"></span>
+                            Longitude de la commune
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="showRain" name="additionalInfo" value="rain">
+                            <span class="checkmark"></span>
+                            Cumul de pluie (mm)
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="showWind" name="additionalInfo" value="wind">
+                            <span class="checkmark"></span>
+                            Vent moyen (km/h)
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="showWindDirection" name="additionalInfo" value="windDirection">
+                            <span class="checkmark"></span>
+                            Direction du vent (°)
+                        </label>
+                    </div>
+                </fieldset>
+
+                <button type="submit" class="submit-btn" disabled>
+                    <span class="btn-text">Obtenir les prévisions</span>
+                    <span class="loader" style="display: none;"></span>
+                </button>
+            </form>
+        </section>
+
+        <section id="resultsSection" class="results-section" style="display: none;">
+            <h2>Prévisions météorologiques</h2>
+            <div id="weatherCards" class="weather-cards-container"></div>
+        </section>
+
+        <section id="errorSection" class="error-section" style="display: none;">
+            <div class="error-message">
+                <span class="error-icon">⚠️</span>
+                <p id="errorText"></p>
+            </div>
+        </section>
+
+        <section class="history-section">
+            <h2>Historique des recherches</h2>
+            <div id="searchHistory" class="search-history">
+                <p class="no-history">Aucune recherche récente</p>
+            </div>
+            <button id="clearHistory" class="clear-history-btn" style="display: none;">
+                Effacer l'historique
+            </button>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Instant Weather - Données fournies par MétéoConcept</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
